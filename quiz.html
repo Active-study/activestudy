@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <title>Quiz System</title>
+  <link rel="icon" type="image/x-icon" href="as.svg">
+  <link rel="stylesheet" href="nev_css.css">
+  <link rel="stylesheet" href="stly.css">
+  <style>
+ 
+
+    .quiz-container {
+      max-width: 600px;
+      margin: auto;
+     
+      border-radius: 10px;
+      /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: white;
+    }
+
+    #questionText {
+      font-size: 20px;
+      margin-bottom: 20px;
+      color: white;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .option {
+      background-color: cyan;
+      border: none;
+      border-radius: 5px;
+      padding: 10px;
+      text-align: left;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+
+    .option:hover {
+      background-color: #b2ebf2;
+    }
+
+    #counter {
+      margin-top: 20px;
+      font-size: 14px;
+      text-align: center;
+      color: #666;
+    }
+
+    .buttons {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #resultsPanel {
+      display: none;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    #resultsPanel div {
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  
+  <nav class="navbar navbar-expand-lg custom-navbar">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="as.svg" alt="logo" width="40" class="d-inline-block align-text-top">
+      </a>
+      <a class="navbar-brand nav-item" href="#">Active Study</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link active nav-item" aria-current="page" href="index.html">Home</a>
+          <a class="nav-link active nav-item" href="app_download.html">Download App</a>
+          <a class="nav-link active nav-item" href="Contacts.html">Contacts</a>
+        </div>
+        <!-- Login Button -->
+        <div class="ms-auto">
+          <!-- <a class="btn btn-primary" href="login.html">Login</a>
+          <a class="btn btn-primary" href="sign_up.html">Sign-up</a> -->
+        </div>
+      </div>
+    </div>
+  </nav>
+  <br>
+  <span id="element" style="display: none;" ></span>
+  <div class="quiz-container card" style="width: 95%;">
+    <h1>Quiz</h1>
+    <!-- Question Text -->
+    <div id="questionText">Loading question...</div>
+
+    <!-- Options -->
+    <div class="options">
+      <button style="color: black; font-size: larger;" id="op1" class="option"></button>
+      <button style="color: black; font-size: larger;" id="op2" class="option"></button>
+      <button style="color: black; font-size: larger;" id="op3" class="option"></button>
+      <button style="color: black; font-size: larger;" id="op4" class="option"></button>
+    </div>
+
+    <!-- Question Counter -->
+    <div id="counter">0 / 0</div>
+
+    <!-- Next and Reset Buttons -->
+    <div class="buttons">
+     <button id="resetButton">Reset</button>
+     <a href="index.html">
+     <button >Home</button>
+    </a>
+      <button id="nextButton">Next</button>
+    </div>
+
+    <!-- Results Panel -->
+    <div id="resultsPanel">
+      <h2  style="color: white;" >Quiz Results</h2>
+      <div style="color: white;" id="totalQuestions">Total Questions: 0</div>
+      <div style="color: white;" id="correctAnswers">Correct Answers: 0</div>
+      <div style="color: white;" id="incorrectAnswers">Incorrect Answers: 0</div>
+      <div style="color: white;" id="skippedQuestions">Skipped Questions: 0</div>
+    </div>
+  </div>
+  <center>
+  <button id="start" class="card" onclick="hide()" style="align-items: center; color: white;">Start Quiz</button>
+</center>
+  <div id="notesModal" class="modal" style="display: block;">
+    <div class="modal-header">
+      <h3 id="h3">Quiz</h3>
+      
+    </div>
+    <p>Explore comprehensive Quizs</p>
+    <form>
+      <!-- Dropdown for Class -->
+      <label for="classSelect">Select Class:</label>
+      <select id="classSelect" name="class" class="form-select" style="margin-bottom: 10px;">
+        <option value="9">Class 9</option>
+       
+      </select>
+  
+      <!-- Dropdown for Subject -->
+      <label for="subjectSelect">Select Subject:</label>
+      <select id="subjectSelect" name="subject" class="form-select" style="margin-bottom: 10px;">
+     
+      </select>
+      <label for="Sub subjectSelect">Sub Select Subject:</label>
+      <select id="Sub_subjectSelect" name="subsubject" class="form-select" style="margin-bottom: 10px;">
+      
+      </select>
+  
+      <!-- Dropdown for Chapter -->
+      <label for="chapterSelect">Select Chapter:</label>
+      <select id="chapterSelect" name="chapter" class="form-select" style="margin-bottom: 10px;">
+    
+      </select>
+  
+      <!-- Submit Button -->
+      <button type="button" id="getdata" class="btn btn-primary" +style="margin-top: 10px;">Submit</button>
+    </form>
+  </div>
+  <div id="select" class="modal">
+    <div class="modal-header">
+      <h3 id="h33">Quizzes</h3>
+      <button onclick="closeModalsel()">&times;</button>
+    </div>
+    <p>Explore comprehensive Study material</p>
+    <form>
+      <!-- Dropdown for Class -->
+      <label for="classSelect">Select Quiz:</label>
+      <select id="QuizSelect" name="class" class="form-select" style="margin-bottom: 10px;">
+  </select>
+      <button type="button" id="getsel"  class="btn btn-primary" +style="margin-top: 10px;">Submit</button>
+    </form>
+  </div>
+  <p id="data" style="display: none;"></p>
+  <script src="main.js"></script>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-analytics.js";
+    import { getDatabase, ref, child, get } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
+  
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyA61m6424LGsW4M2GXwLi4IbiXkyCgtcGY",
+      authDomain: "active-study-7bf81.firebaseapp.com",
+      databaseURL: "https://active-study-7bf81-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "active-study-7bf81",
+      storageBucket: "active-study-7bf81.appspot.com",
+      messagingSenderId: "983711923367",
+      appId: "1:983711923367:web:5b884794db3a10d5d02f82",
+      measurementId: "G-PTCHVHN7QV"
+    };
+  
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const database = getDatabase(app);
+  
+    // Function to fetch chapter data
+    async function fetchData(subject, subSubject, chapter) {
+      try {
+        const dbRef = ref(database);
+        const snapshot = await get(child(dbRef, `class/class9/${subject}/${subSubject}/${chapter}/jsondata`));
+        if (snapshot.exists()) {
+          console.log("Data fetched successfully:", snapshot.val());
+          return snapshot.val();
+        } else {
+          console.error("No data available for the requested path.");
+          return null;
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        return null;
+      }
+    }
+  
+    // Function to fetch quiz data
+    async function fetchQuizData(subject, subSubject, chapter, quiz) {
+      try {
+        const dbRef = ref(database);
+        const snapshot = await get(child(dbRef, `class/class9/${subject}/${subSubject}/${chapter}/Quiz/${quiz}`));
+        if (snapshot.exists()) {
+          console.log("Quiz Data fetched successfully:", snapshot.val());
+          return snapshot.val();
+        } else {
+          console.error("No quiz data available for the requested path.");
+          return null;
+        }
+      } catch (error) {
+        console.error("Error fetching quiz data:", error);
+        return null;
+      }
+    }
+  
+    let subject = "";
+    let subSubject = "";
+    let chapter = "";
+    let dataObject = null;
+  
+    async function loaddata() {
+      const subjectElement = document.getElementById("subjectSelect");
+      const subSubjectElement = document.getElementById("Sub_subjectSelect");
+      const chapterElement = document.getElementById("chapterSelect");
+  
+      subject = subjectElement.value;
+      subSubject = subSubjectElement.value;
+      chapter = chapterElement.value;
+  
+      if (!subject || !subSubject || !chapter) {
+        alert("Please select all options before submitting.");
+        return null;
+      }
+  
+      const data = await fetchData(subject, subSubject, chapter);
+      if (data) {
+        console.log("Data loaded successfully:", data);
+        return data;
+      } else {
+        alert("Failed to fetch data. Please try again.");
+        return null;
+      }
+    }
+  
+    document.addEventListener("DOMContentLoaded", () => {
+      const getDataButton = document.getElementById("getdata");
+      const quizSelect = document.getElementById("QuizSelect");
+      const getQuizButton = document.getElementById("getsel");
+  
+      // Load chapter data
+      getDataButton.addEventListener("click", async () => {
+        dataObject = await loaddata();
+  
+        if (dataObject && Array.isArray(dataObject.quiz)) {
+          quizSelect.innerHTML = ""; // Clear previous options
+          document.getElementById("select").style.display = "block";
+      
+  
+          dataObject.quiz.forEach((quiz, index) => {
+            const newOption = document.createElement("option");
+            newOption.text = `Quiz sheet ${index +1}`;
+            newOption.value = index;
+            quizSelect.appendChild(newOption);
+          });
+        } else {
+          console.error("Invalid dataObject or no quizzes found.");
+        }
+      });
+  
+      // Load selected quiz data
+      getQuizButton.addEventListener("click", async () => {
+        const quizIndex = quizSelect.value;
+        if (!quizIndex || !dataObject || !dataObject.quiz[quizIndex]) {
+          alert("Please select a valid quiz.");
+          return;
+        }
+  
+        const quizKey = dataObject.quiz[quizIndex].qz;
+        const quizData = await fetchQuizData(subject, subSubject, chapter, quizKey);
+  
+        if (quizData) {
+          let a=quizData;
+          document.getElementById("data").innerText = JSON.stringify(quizData); 
+          console.log("Quiz data loaded successfully:",a);
+        
+          document.getElementById("select").style.display = "none";
+          document.getElementById("notesModal").style.display = "none";
+        // Example display
+        } else {
+          alert("Failed to fetch quiz data. Please try again.");
+        }
+      });
+    });
+  </script>
+  
+  <script>
+    function hide(){
+      document.getElementById("start").style.display="none"
+    }
+    class QuizSystem {
+      constructor(data) {
+        this.questions = data || [];
+        this.currentIndex = -1;
+        this.correctCount = 0;
+        this.incorrectCount = 0;
+        this.skipCount = 0;
+        this.isAnswerClicked = true;
+      }
+  
+      loadQuiz() {
+        this.currentIndex++;
+        if (this.isAnswerClicked && this.currentIndex !== 0) {
+          this.skipCount++;
+        }
+  
+        if (this.currentIndex < this.questions.length) {
+          this.renderQuestion(this.questions[this.currentIndex]);
+          this.updateCounter();
+          if (this.currentIndex === this.questions.length - 1) {
+            document.getElementById("nextButton").innerText = "Submit";
+          }
+        } else {
+          this.showResults();
+        }
+        this.isAnswerClicked = true;
+      }
+  
+      renderQuestion(questionObj) {
+        document.getElementById("questionText").innerText = questionObj.question;
+        document.getElementById("op1").innerText = questionObj.op_1;
+        document.getElementById("op2").innerText = questionObj.op_2;
+        document.getElementById("op3").innerText = questionObj.op_3;
+        document.getElementById("op4").innerText = questionObj.op_4;
+        this.resetOptionStyles();
+      }
+  
+      checkAnswer(selectedOption) {
+        const correctAnswer = this.questions[this.currentIndex].ans;
+        const selectedText = document.getElementById(selectedOption).innerText;
+  
+        if (selectedText === correctAnswer) {
+          document.getElementById(selectedOption).style.backgroundColor = "green";
+          this.correctCount++;
+        } else {
+          document.getElementById(selectedOption).style.backgroundColor = "red";
+          this.highlightCorrectAnswer(correctAnswer);
+          this.incorrectCount++;
+        }
+        this.isAnswerClicked = false;
+      }
+  
+      highlightCorrectAnswer(answer) {
+        ["op1", "op2", "op3", "op4"].forEach((id) => {
+          if (document.getElementById(id).innerText === answer) {
+            document.getElementById(id).style.backgroundColor = "green";
+          }
+        });
+      }
+  
+      resetOptionStyles() {
+        ["op1", "op2", "op3", "op4"].forEach((id) => {
+          const element = document.getElementById(id);
+          element.style.backgroundColor = "cyan";
+        });
+      }
+  
+      updateCounter() {
+        document.getElementById("counter").innerText = `${this.currentIndex + 1} / ${this.questions.length}`;
+      }
+  
+      showResults() {
+        const total = this.correctCount + this.incorrectCount + this.skipCount;
+        document.getElementById("totalQuestions").innerText = `Total Questions: ${total}`;
+        document.getElementById("correctAnswers").innerText = `Correct Answers: ${this.correctCount}`;
+        document.getElementById("incorrectAnswers").innerText = `Incorrect Answers: ${this.incorrectCount}`;
+        document.getElementById("skippedQuestions").innerText = `Skipped Questions: ${this.skipCount}`;
+        document.getElementById("resultsPanel").style.display = "block";
+      }
+  
+      resetQuiz() {
+        this.currentIndex = -1;
+        this.correctCount = 0;
+        this.incorrectCount = 0;
+        this.skipCount = 0;
+        this.isAnswerClicked = true;
+        this.loadQuiz();
+        document.getElementById("resultsPanel").style.display = "none";
+        document.getElementById("nextButton").innerText = "Next";
+      }
+    }
+  
+    document.addEventListener("DOMContentLoaded", () => {
+      let quiz;
+  
+      document.getElementById("start").addEventListener("click", async () => {
+        try {
+          const jsondata = document.getElementById("data").innerText;
+          if (!jsondata) {
+            alert("No quiz data found. Please load data first.");
+            return;
+          }
+          const quizData = JSON.parse(jsondata).data;
+  
+          quiz = new QuizSystem(quizData);
+          quiz.loadQuiz();
+        } catch (error) {
+          console.error("Error initializing quiz:", error);
+          alert("Failed to load quiz data.");
+        }
+      });
+  
+      document.getElementById("nextButton").addEventListener("click", () => {
+        if (quiz) {
+          quiz.loadQuiz();
+        } else {
+          alert("Please load quiz data first.");
+        }
+      });
+  
+      ["op1", "op2", "op3", "op4"].forEach((id) => {
+        document.getElementById(id).addEventListener("click", () => {
+          if (quiz) {
+            quiz.checkAnswer(id);
+          }
+        });
+      });
+  
+      document.getElementById("resetButton").addEventListener("click", () => {
+        if (quiz) {
+          quiz.resetQuiz();
+        }
+      });
+    });
+  </script>
+  
+
+</body>
+</html>

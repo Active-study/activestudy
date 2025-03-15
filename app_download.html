@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Download Android App</title>
+    <link rel="icon" type="image/x-icon" href="as.svg">
+    <link rel="stylesheet" href="nev_css.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <style>
+        header {
+            background-color: #2b2b40;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .app-info {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .app-info img {
+            max-width: 150px;
+            margin: 10px 0;
+        }
+        .download-btn {
+            display: inline-block;
+            background-color: #2c2f33;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .download-btn:hover {
+            background-color: #444;
+        }
+        .install-instructions {
+            margin: 20px auto;
+            max-width: 600px;
+            text-align: left;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .install-instructions ol {
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg custom-navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="as.svg" alt="logo" width="40" class="d-inline-block align-text-top">
+            </a>
+            <a class="navbar-brand nav-item" href="#">Active Study</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link active nav-item" aria-current="page" href="index.html">Home</a>
+                    <a class="nav-link active nav-item" href="app_download.html">Download App</a>
+                    <a class="nav-link active nav-item" href="Contacts.html">Contacts</a>
+                </div>
+                <!-- Login Button -->
+                <div class="ms-auto">
+                    <!-- <a class="btn btn-primary" href="login.html">Login</a>
+                    <a class="btn btn-primary" href="sign_up.html">Sign Up</a> -->
+                </div>
+            </div>
+        </div>
+    </nav>
+    <br>
+    <header>
+        <h1>Download Our Android App</h1>
+    </header>
+    <br>
+    <center>
+        <div class="container card" style="width: 95%;">
+            <div class="app-info">
+                <!-- App Logo -->
+                <img src="as.svg" alt="App Logo">
+                <!-- App Description -->
+                <p style="color: white;">Download our Android app to access all the features on the go! Stay updated with your studies, manage resources, and more.</p>
+            </div>
+            <!-- Download Button -->
+            <div style="text-align: center;">
+                <a href="app-release.apk" class="download-btn" download>
+                    <i class="fab fa-android"></i> Download App
+                </a>
+            </div>
+        </div>
+        <br>
+        <div class="container card" style="width: 95%;">
+            <h3 style="color: #fff;">How to Install the APK</h3>
+            <ol style="color: #fff;">
+                <li style="color: #fff;">Download the APK file by clicking the <strong>Download App</strong> button above.</li>
+                <li style="color: #fff;">Before installing the APK, you may need to enable installation from unknown sources on your Android device:
+                    <ul style="color: #fff;">
+                        <li>Go to <strong>Settings</strong> &gt; <strong>Security</strong> or <strong>Privacy</strong> &gt; <strong>Install unknown apps</strong>.</li>
+                        <li>Select the browser or file manager you used to download the APK.</li>
+                        <li>Enable the option <strong>Allow from this source</strong>.</li>
+                    </ul>
+                </li>
+                <li>Open the downloaded APK file from your <strong>Downloads</strong> folder or the notification bar.</li>
+                <li>Click <strong>Install</strong> to begin the installation.</li>
+                <li>Once the installation is complete, tap <strong>Open</strong> to launch the app and start using it.</li>
+            </ol>
+        </div>
+    </center>
+    <footer style="padding: 20px; text-align: center;">
+        <div style="max-width: 1200px; margin: auto;">
+            <!-- Logo or Name -->
+            <div style="margin-bottom: 10px;">
+                <img src="as.svg" alt="Active Study Logo" style="height: 50px; vertical-align: middle;">
+                <h2 style="display: inline-block; margin-left: 10px;">Active Study</h2>
+            </div>
+            <!-- Links -->
+            <div style="margin-bottom: 10px;">
+                <a href="/about-us" style="color: white; text-decoration: none; margin: 0 10px;">About Us</a>
+                <a href="/contact" style="color: white; text-decoration: none; margin: 0 10px;">Contact</a>
+            </div>
+            <!-- Social Media -->
+            <div style="margin-bottom: 10px;">
+                <a href="https://facebook.com" target="_blank" style="color: white; margin: 0 10px;">
+                    <i class="fab fa-facebook" style="font-size: 20px;"></i>
+                </a>
+                <a href="https://twitter.com" target="_blank" style="color: white; margin: 0 10px;">
+                    <i class="fab fa-twitter" style="font-size: 20px;"></i>
+                </a>
+                <a href="https://www.instagram.com/active__study/" target="_blank" style="color: white; margin: 0 10px;">
+                    <i class="fab fa-instagram" style="font-size: 20px;"></i>
+                </a>
+                <a href="https://www.youtube.com/channel/UC7bYHl_iuMq6jCmw5yMUQEA" target="_blank" style="color: white; margin: 0 10px;">
+                    <i class="fab fa-youtube" style="font-size: 20px;"></i>
+                </a>
+            </div>
+            <div>
+                <i class="fas fa-envelope" style="color: #fff;"></i>
+                <a href="mailto:activestudy247@gmail.com" style="color: #fff">activestudy247@gmail.com</a>
+            </div>
+            <!-- Copyright -->
+            <div>
+                <p>&copy; 2025 Active Study. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
